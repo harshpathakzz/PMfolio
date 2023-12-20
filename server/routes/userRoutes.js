@@ -1,5 +1,13 @@
 import express from "express";
-import { getUserProfile } from "../controllers/userController.js";
+import {
+  followUser,
+  getUserBlogs,
+  getUserCaseStudies,
+  getUserFollowers,
+  getUserFollowing,
+  getUserProfile,
+  updateUserProfile,
+} from "../controllers/userController.js";
 import validateToken from "../utils/validateToken.js";
 const router = express.Router();
 
@@ -10,29 +18,17 @@ router.get("/", (req, res) => {
 
 router.get("/:id/profile", getUserProfile);
 
-router.put("/:id/update", (req, res) => {
-  res.send("profile " + req.params.id + " updated");
-});
+router.put("/:id/update", validateToken, updateUserProfile);
 
-router.get("/:id/blogs", (req, res) => {
-  res.send("blogs of profile " + req.params.id);
-});
+router.get("/:id/blogs", getUserBlogs);
 
-router.get("/:id/case-studies", (req, res) => {
-  res.send("case studies of profile " + req.params.id);
-});
+router.get("/:id/case-studies", getUserCaseStudies);
 
-router.get("/:id/followers", (req, res) => {
-  res.send("followers of profile " + req.params.id);
-});
+router.get("/:id/followers", getUserFollowers);
 
-router.get("/:id/following", (req, res) => {
-  res.send("following of profile " + req.params.id);
-});
+router.get("/:id/following", getUserFollowing);
 
-router.post("/:id/follow", (req, res) => {
-  res.send("followed profile " + req.params.id);
-});
+router.post("/:id/follow", validateToken, followUser);
 
 router.delete("/:id/unfollow", (req, res) => {
   res.send("unfollowed profile " + req.params.id);
