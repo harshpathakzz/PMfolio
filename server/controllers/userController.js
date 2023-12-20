@@ -86,6 +86,6 @@ export const followUser = async (req, res) => {
     res.json({ message: "User followed successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: error.message });
   }
 };
