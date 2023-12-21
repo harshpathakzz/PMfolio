@@ -8,7 +8,7 @@ import {
   getUserProfile,
   updateUserProfile,
 } from "../controllers/userController.js";
-import validateToken from "../utils/validateToken.js";
+import validateToken from "../middleware/validateToken.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
