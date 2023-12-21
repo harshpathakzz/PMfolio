@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 
 export const registerUser = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -11,7 +11,6 @@ export const registerUser = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
-      username,
       email,
       password: hashedPassword,
     });
