@@ -11,7 +11,7 @@ export const getUserProfile = async (req, res) => {
 
 export const updateUserProfile = async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const user = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
     res.json(user);
@@ -80,10 +80,56 @@ export const followUser = async (req, res) => {
     userToFollow.followers.push(userId);
     currentUser.following.push(userToFollowId);
 
+    // Increase followingCount of currentUser by one
+    currentUser.followingCount += 1;
+
+    // Increase followerCount of userToFollow by one
+    userToFollow.followerCount += 1;
+
     // Save changes to the database
     await Promise.all([userToFollow.save(), currentUser.save()]);
 
     res.json({ message: "User followed successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const unfollowUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const userToUnfollowId = req.params.id;
+
+    const userToUnfollow = await User.findById(userToUnfollowId);
+    const currentUser = await User.findById(userId);
+
+    if (!userToUnfollow || !currentUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!userToUnfollow.followers.includes(userId)) {
+      return res.status(400).json({ message: "User not followed" });
+    }
+
+    // Remove userId from userToUnfollow's followers and userToUnfollowId from currentUser's following
+    userToUnfollow.followers = userToUnfollow.followers.filter(
+      (id) => id !== userId
+    );
+    currentUser.following = currentUser.following.filter(
+      (id) => id !== userToUnfollowId
+    );
+
+    // Decrease followingCount of currentUser by one
+    currentUser.followingCount -= 1;
+
+    // Decrease followerCount of userToUnfollow by one
+    userToUnfollow.followerCount -= 1;
+
+    // Save changes to the database
+    await Promise.all([userToUnfollow.save(), currentUser.save()]);
+
+    res.json({ message: "User unfollowed successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
