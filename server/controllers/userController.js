@@ -3,56 +3,57 @@ import User from "../models/userModel.js";
 export const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json(user);
+    return res.json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const updateUserProfile = async (req, res) => {
   try {
+    console.log(req.user.id);
     const user = await User.findByIdAndUpdate(req.user.id, req.body, {
       new: true,
     });
-    res.json(user);
+    return res.json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const getUserBlogs = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json(user.blogs);
+    return res.json(user.blogs);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const getUserCaseStudies = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json(user.caseStudies);
+    return res.json(user.caseStudies);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const getUserFollowers = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json(user.followers);
+    return res.json(user.followers);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const getUserFollowing = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json(user.following);
+    return res.json(user.following);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -89,10 +90,10 @@ export const followUser = async (req, res) => {
     // Save changes to the database
     await Promise.all([userToFollow.save(), currentUser.save()]);
 
-    res.json({ message: "User followed successfully" });
+    return res.json({ message: "User followed successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -129,9 +130,9 @@ export const unfollowUser = async (req, res) => {
     // Save changes to the database
     await Promise.all([userToUnfollow.save(), currentUser.save()]);
 
-    res.json({ message: "User unfollowed successfully" });
+    return res.json({ message: "User unfollowed successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };

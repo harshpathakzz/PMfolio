@@ -6,7 +6,9 @@ const validateToken = async (req, res, next) => {
     const token = authHeader.split(" ")[1];
     try {
       const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded.user;
+      req.user = decoded;
+      console.log(decoded);
+      console.log(req.user);
       next();
     } catch (err) {
       res.status(401).json({ message: "User is not authorized" });

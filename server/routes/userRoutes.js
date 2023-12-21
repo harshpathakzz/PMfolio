@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 
 router.get("/:id/profile", getUserProfile);
 
-router.put("/:id/update", validateToken, updateUserProfile);
+router.put("/update", validateToken, updateUserProfile);
 
 router.get("/:id/blogs", getUserBlogs);
 
