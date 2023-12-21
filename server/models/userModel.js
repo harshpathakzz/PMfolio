@@ -7,6 +7,10 @@ const userSchema = new Schema(
     username: {
       type: String,
     },
+    bio: {
+      type: String,
+    },
+
     email: {
       type: String,
       unique: true,
@@ -37,12 +41,18 @@ const userSchema = new Schema(
         ref: "User",
       },
     ],
+    followersCount: {
+      type: Number,
+    },
     following: [
       {
         type: Schema.Types.ObjectId,
         ref: "User",
       },
     ],
+    followingCount: {
+      type: Number,
+    },
   },
   {
     timestamps: true,
