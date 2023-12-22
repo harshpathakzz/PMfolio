@@ -4,6 +4,7 @@ import cors from "cors";
 import connectDB from "./config/dbConnection.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import caseStudiesRoutes from "./routes/caseStudyRoutes.js";
 
 config();
 
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/case-studies", caseStudiesRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello from Express!");
