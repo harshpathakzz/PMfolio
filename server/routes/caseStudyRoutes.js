@@ -7,11 +7,16 @@ import {
   deleteCaseStudy,
 } from "../controllers/caseStudyController.js";
 import validateToken from "../middleware/validateToken.js";
-
+import { upload } from "../config/multerConfig.js";
 const router = express.Router();
 
 // Create a new case study
-router.post("/", createCaseStudy);
+router.post(
+  "/create",
+  validateToken,
+  upload.single("coverImageFile"),
+  createCaseStudy
+);
 
 // Get all case studies
 router.get("/:id", getCaseStudiesByUserId);

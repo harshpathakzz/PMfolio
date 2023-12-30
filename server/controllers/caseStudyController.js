@@ -1,20 +1,49 @@
 import CaseStudy from "../models/caseStudymodel.js";
+import { storage } from "../config/firebaseConfig.js";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-// Create a new case study
 export const createCaseStudy = async (req, res) => {
   try {
-    const { userId, title, description, link, coverImage } = req.body;
+    const { title, description, link } = req.body;
+
+    // // Check if the request has files
+    // if (!req.files || Object.keys(req.files).length === 0) {
+    //   return res.status(400).json({ error: "No files were uploaded." });
+    // }
+
+    // Assuming "coverImageFile" is the name attribute of your file input field
+    const imageBuffer = req.file.buffer;
+    const filename = Date.now() + "_" + req.file.originalname;
+    const contentType = req.file.mimetype;
+
+    const userId = req.user.id;
+
+    // Upload the image to Firebase storage
+    const storageRef = ref(storage, `coverImages/${filename}`);
+    await uploadBytes(storageRef, imageBuffer, { contentType });
+
+    // Get the download URL of the uploaded image
+    const downloadURL = await getDownloadURL(storageRef);
+    console.log("Cover image URL:", downloadURL);
+
     const newCaseStudy = new CaseStudy({
       userId,
       title,
       description,
       link,
-      coverImage,
+      coverImage: downloadURL,
     });
+
+    // Save the case study to the database
     const savedCaseStudy = await newCaseStudy.save();
+
+    // Return the saved case study in the response
     return res.status(201).json(savedCaseStudy);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    console.error("Error:", error);
+
+    // Handle errors appropriately
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
