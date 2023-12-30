@@ -4,10 +4,6 @@ import { auth } from "../config/firebaseConfig.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signOut,
-  onAuthStateChanged,
   sendPasswordResetEmail,
 } from "firebase/auth";
 
@@ -66,7 +62,6 @@ export const loginUser = async (req, res) => {
     );
     return res.status(200).json({ accessToken });
   } catch (error) {
-    console.log(error);
     // Check for specific error codes and provide appropriate responses
     if (
       error.code === "auth/user-not-found" ||
@@ -86,7 +81,6 @@ export const sendResetPasswordEmail = async (req, res) => {
     await sendPasswordResetEmail(auth, email);
     return res.status(200).json({ message: "Reset password email sent" });
   } catch (error) {
-    console.log(error);
     // Check for specific error codes and provide appropriate responses
     if (error.code === "auth/user-not-found") {
       return res.status(400).json({ message: "User not found" });
