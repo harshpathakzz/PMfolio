@@ -16,10 +16,16 @@ const userSchema = new Schema(
       unique: true,
       required: true,
     },
-    password: {
+    // password: {
+    //   type: String,
+    //   required: true,
+    // },
+
+    firebaseUid: {
       type: String,
       required: true,
     },
+
     profilePicture: {
       type: String,
     },
