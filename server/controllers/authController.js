@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 
 export const registerUser = async (req, res) => {
-  const { email, password, username, bio } = req.body;
+  const { email, password, username, bio, profilePicture } = req.body;
   try {
     // Create a new user in Firebase
     const { user } = await createUserWithEmailAndPassword(
@@ -23,6 +23,7 @@ export const registerUser = async (req, res) => {
       firebaseUid: user.uid, // Store Firebase UID
       username,
       bio,
+      profilePicture,
     });
     await newUser.save();
 
