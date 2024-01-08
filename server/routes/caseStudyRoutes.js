@@ -11,12 +11,7 @@ import { upload } from "../config/multerConfig.js";
 const router = express.Router();
 
 // Create a new case study
-router.post(
-  "/create",
-  validateToken,
-  upload.single("coverImageFile"),
-  createCaseStudy
-);
+router.post("/create", validateToken, upload.single("image"), createCaseStudy);
 
 // Get all case studies
 router.get("/:id", getCaseStudiesByUserId);
