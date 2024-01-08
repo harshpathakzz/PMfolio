@@ -1,19 +1,24 @@
 import React from "react";
-import { Button } from "./components/ui/button";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "./components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
+import HomePage from "@/pages/HomePage";
+import RegisterPage from "@/pages/RegisterPage";
+import LoginPage from "@/pages/LoginPage";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div>
-        App
-        <Button variant="secondary" onCli>
-          Submit
-        </Button>
-        <ModeToggle />
-      </div>
-    </ThemeProvider>
+    <div>
+      App
+      <Button variant="secondary">Submit</Button>
+      <ModeToggle />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<div>404</div>} />
+      </Routes>
+    </div>
   );
 };
 
