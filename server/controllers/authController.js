@@ -63,7 +63,7 @@ export const loginUser = async (req, res) => {
         expiresIn: "30d",
       }
     );
-    return res.status(200).json({ accessToken });
+    return res.status(200).json({ accessToken, user: mongoUser });
   } catch (error) {
     // Check for specific error codes and provide appropriate responses
     if (
