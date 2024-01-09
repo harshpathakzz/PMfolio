@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -49,17 +53,14 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 text-black">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md">
-        <h2 className="text-2xl font-semibold mb-6">Sign Up</h2>
+    <div className="max-w-md mx-auto mt-1">
+      <form onSubmit={handleSubmit} className=" p-8 rounded shadow-md">
+        <h2 className="text-4xl font-semibold mb-6">Sign Up</h2>
         <div className="mb-4">
-          <label
-            htmlFor="username"
-            className="block text-sm font-medium text-gray-600"
-          >
+          <Label htmlFor="username" className="block text-sm font-medium">
             Username
-          </label>
-          <input
+          </Label>
+          <Input
             type="text"
             id="username"
             name="username"
@@ -70,29 +71,23 @@ const RegisterPage = () => {
           />
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="bio"
-            className="block text-sm font-medium text-gray-600"
-          >
+          <Label htmlFor="bio" className="block text-sm font-medium ">
             Bio
-          </label>
-          <textarea
+          </Label>
+          <Textarea
             id="bio"
             name="bio"
             value={formData.bio}
             onChange={handleChange}
             rows="3"
             className="mt-1 p-2 w-full border rounded-md"
-          ></textarea>
+          ></Textarea>
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-600"
-          >
+          <Label htmlFor="email" className="block text-sm font-medium ">
             Email
-          </label>
-          <input
+          </Label>
+          <Input
             type="email"
             id="email"
             name="email"
@@ -103,13 +98,10 @@ const RegisterPage = () => {
           />
         </div>
         <div className="mb-6">
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-600"
-          >
+          <Label htmlFor="password" className="block text-sm font-medium">
             Password
-          </label>
-          <input
+          </Label>
+          <Input
             type="password"
             id="password"
             name="password"
@@ -119,12 +111,9 @@ const RegisterPage = () => {
             required
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-        >
+        <Button type="submit" className="w-full">
           Sign Up
-        </button>
+        </Button>
       </form>
     </div>
   );

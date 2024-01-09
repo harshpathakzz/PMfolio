@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { login } from "@/slices/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -56,17 +59,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 text-black">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md">
-        <h2 className="text-2xl font-semibold mb-6">Login</h2>
+    <div className="max-w-md mx-auto mt-1">
+      <form onSubmit={handleSubmit} className=" p-8 rounded shadow-md">
+        <h2 className="text-4xl font-semibold mb-6">Login</h2>
         <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-600"
-          >
+          <Label htmlFor="email" className="block text-sm font-medium ">
             Email
-          </label>
-          <input
+          </Label>
+          <Input
             type="email"
             id="email"
             name="email"
@@ -77,13 +77,10 @@ const LoginPage = () => {
           />
         </div>
         <div className="mb-6">
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-600"
-          >
+          <Label htmlFor="password" className="block text-sm font-medium ">
             Password
-          </label>
-          <input
+          </Label>
+          <Input
             type="password"
             id="password"
             name="password"
@@ -93,12 +90,9 @@ const LoginPage = () => {
             required
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-        >
+        <Button type="submit" className="w-full">
           Login
-        </button>
+        </Button>
       </form>
     </div>
   );
