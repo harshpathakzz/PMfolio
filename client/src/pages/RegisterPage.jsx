@@ -16,7 +16,7 @@ const RegisterPage = () => {
     bio: "",
     email: "",
     password: "",
-    profilePicture: "image link",
+    profilePicture: "https://ui.shadcn.com/avatars/02.png",
   });
 
   useEffect(() => {
