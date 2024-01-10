@@ -5,7 +5,8 @@ import HomePage from "@/pages/HomePage";
 import RegisterPage from "@/pages/RegisterPage";
 import LoginPage from "@/pages/LoginPage";
 import { Routes, Route } from "react-router-dom";
-import CreateCaseStudy from "./pages/CreateCaseStudy";
+import CreateCaseStudy from "@/pages/CreateCaseStudy";
+import ProfilePage from "@/pages/ProfilePage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/add-case-study" element={<CreateCaseStudy />} />
+        <Route path="/:userId" element={<ProfilePage />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>

@@ -49,6 +49,7 @@ const userSchema = new Schema(
     ],
     followersCount: {
       type: Number,
+      default: 0,
     },
     following: [
       {
@@ -58,6 +59,7 @@ const userSchema = new Schema(
     ],
     followingCount: {
       type: Number,
+      default: 0,
     },
   },
   {
