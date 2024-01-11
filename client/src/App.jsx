@@ -7,13 +7,14 @@ import LoginPage from "@/pages/LoginPage";
 import { Routes, Route } from "react-router-dom";
 import CreateCaseStudy from "@/pages/CreateCaseStudy";
 import ProfilePage from "@/pages/ProfilePage";
+import Sidebar from "@/components/component/Sidebar";
+import Searchbar from "./components/component/Searchbar";
+import Header from "./components/component/Header";
 
 const App = () => {
   return (
     <div>
-      App
-      <Button variant="secondary">Submit</Button>
-      <ModeToggle />
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
