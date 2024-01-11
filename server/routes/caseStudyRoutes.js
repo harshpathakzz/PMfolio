@@ -17,7 +17,7 @@ router.post("/create", validateToken, upload.single("image"), createCaseStudy);
 router.get("/user/:userId", getCaseStudiesByUserId);
 
 // Get a specific case study by ID
-router.get("/:id", getCaseStudyById);
+router.get("/:caseStudyId", getCaseStudyById);
 
 // Update a case study by ID
 router.put("/:id", validateToken, updateCaseStudy);

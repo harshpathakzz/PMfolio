@@ -61,7 +61,7 @@ export const getCaseStudiesByUserId = async (req, res) => {
 // Get a specific case study by ID
 export const getCaseStudyById = async (req, res) => {
   try {
-    const caseStudy = await CaseStudy.findById(req.params.id);
+    const caseStudy = await CaseStudy.findById(req.params.caseStudyId);
     if (!caseStudy) {
       return res.status(404).json({ error: "Case study not found" });
     }
