@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import CaseStudyCard from "@/components/component/CaseStudyCard";
 import axios from "axios";
 
 const ProfilePage = () => {
@@ -15,7 +16,6 @@ const ProfilePage = () => {
           `http://localhost:5000/api/v1/user/${userId}/profile`
         );
         setUserData(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -27,9 +27,8 @@ const ProfilePage = () => {
           `http://localhost:5000/api/v1/case-studies/user/${userId}`
         );
         setUserCaseStudies(response.data);
-        console.log(response.data);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching case studies:", error);
       }
     };
 
@@ -57,6 +56,23 @@ const ProfilePage = () => {
               following
             </p>
           </div>
+
+          {userCaseStudies ? (
+            <div className="mt-4">
+              <h3 className="text-xl font-bold mb-2">Case Studies</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {userCaseStudies.map((caseStudy) => (
+                  <CaseStudyCard
+                    key={caseStudy._id}
+                    title={caseStudy.title}
+                    coverImage={caseStudy.coverImage}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="text-center">Loading case studies...</p>
+          )}
         </div>
       ) : (
         <p className="text-center">Loading...</p>
