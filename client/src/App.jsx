@@ -7,9 +7,12 @@ import LoginPage from "@/pages/LoginPage";
 import { Routes, Route } from "react-router-dom";
 import CreateCaseStudy from "@/pages/CreateCaseStudy";
 import ProfilePage from "@/pages/ProfilePage";
+import DashBoard from "@/pages/DashBoard";
 import SidebarElements from "@/components/component/SidebarElements";
 import Searchbar from "./components/component/Searchbar";
 import Header from "./components/component/Header";
+import JobsPage from "@/pages/JobsPage";
+import SettingsPage from "@/pages/SettingsPage";
 
 const App = () => {
   return (
@@ -27,7 +30,10 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/add-case-study" element={<CreateCaseStudy />} />
-            <Route path="/:userId" element={<ProfilePage />} />
+            <Route path="/user/:userId" element={<ProfilePage />} />
+            <Route path="/dashboard" element={<DashBoard />} />
+            <Route path="/jobs" element={<JobsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<div>404</div>} />
           </Routes>
         </div>
