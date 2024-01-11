@@ -6,13 +6,17 @@ import { ModeToggle } from "../mode-toggle";
 
 const Header = () => {
   return (
-    <div>
-      <div className="flex space-x-6">
-        <Sidebar />
+    <div className="m-2 ">
+      <div className="flex items-center justify-between p-1">
+        <div className="sm:hidden font-bold text-xl">
+          <Sidebar />
+        </div>
+        <div className="sm:block hidden font-bold text-2xl ">PmFolio</div>
+
         <Searchbar />
-        <ModeToggle />
+        <ModeToggle className />
       </div>
-      <Separator className="m-4 w-full" />
+      <Separator className=" m-1 w-full" />
     </div>
   );
 };
