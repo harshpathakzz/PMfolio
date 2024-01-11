@@ -1,7 +1,6 @@
 import Searchbar from "./Searchbar";
 import Sidebar from "./Sidebar";
 import { Separator } from "@/components/ui/separator";
-
 import { ModeToggle } from "../mode-toggle";
 
 const Header = () => {
@@ -11,12 +10,12 @@ const Header = () => {
         <div className="sm:hidden font-bold text-xl">
           <Sidebar />
         </div>
-        <div className="sm:block hidden font-bold text-2xl ">PmFolio</div>
+        <div className="sm:block hidden font-bold text-2xl">PmFolio</div>
 
         <Searchbar />
         <ModeToggle className />
       </div>
-      <Separator className=" m-1 w-full" />
+      <Separator className="m-1 w-full" />
     </div>
   );
 };

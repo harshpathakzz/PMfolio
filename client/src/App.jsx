@@ -14,15 +14,28 @@ import Header from "./components/component/Header";
 const App = () => {
   return (
     <div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/add-case-study" element={<CreateCaseStudy />} />
-        <Route path="/:userId" element={<ProfilePage />} />
-        <Route path="*" element={<div>404</div>} />
-      </Routes>
+      <div>
+        <Header />
+      </div>
+      <div className="flex">
+        {/* Render Sidebar only on desktop */}
+        {window.innerWidth >= 640 && (
+          <div className="hidden sm:block w-1/5 bg-green-600">
+            Sidebar Desktop
+          </div>
+        )}
+
+        <div>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/add-case-study" element={<CreateCaseStudy />} />
+            <Route path="/:userId" element={<ProfilePage />} />
+            <Route path="*" element={<div>404</div>} />
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 };
