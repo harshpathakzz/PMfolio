@@ -20,7 +20,6 @@ const CaseStudyPage = () => {
         );
         setCaseStudyData(response.data);
 
-        // Fetch user data only if case study data is available
         if (response.data) {
           try {
             const userResponse = await axios.get(
@@ -40,18 +39,18 @@ const CaseStudyPage = () => {
   }, [caseStudyId]);
 
   return (
-    <div className="max-w-2xl mx-auto mt-8">
+    <div className="max-w-2xl mx-auto mt-8 p-4">
       {caseStudyData && (
         <div className="rounded-lg overflow-hidden shadow-lg">
           <img
             src={caseStudyData.coverImage}
             alt="Cover Image"
-            className="w-full h-64 object-cover object-center"
+            className="w-full h-48 object-cover object-center rounded-t-lg"
           />
-          <div className="p-6">
+          <div className="p-4">
             <h2 className="text-2xl font-bold mb-2">{caseStudyData.title}</h2>
             {userData && (
-              <div className="flex items-center mb-4">
+              <div className="flex items-center mb-2">
                 <Avatar className="mr-2">
                   <AvatarImage
                     src={userData.profilePicture}
@@ -64,13 +63,14 @@ const CaseStudyPage = () => {
               </div>
             )}
             <Button
-              className="px-4 py-2"
-              onClick={() => (window.location.href = caseStudyData.link)}
+              className="px-4 py-2 mb-2 w-full"
+              onClick={() => window.open(caseStudyData.link, "_blank")}
             >
               Visit Link
-              <ArrowTopRightIcon />
+              <ArrowTopRightIcon className="ml-1" />
             </Button>
-            <p className="mt-4">{caseStudyData.description}</p>
+
+            <p className="text-sm">{caseStudyData.description}</p>
           </div>
         </div>
       )}
