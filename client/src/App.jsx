@@ -1,6 +1,3 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/mode-toggle";
 import HomePage from "@/pages/HomePage";
 import RegisterPage from "@/pages/RegisterPage";
 import LoginPage from "@/pages/LoginPage";
@@ -9,10 +6,11 @@ import CreateCaseStudy from "@/pages/CreateCaseStudy";
 import ProfilePage from "@/pages/ProfilePage";
 import DashBoard from "@/pages/DashBoard";
 import SidebarElements from "@/components/component/SidebarElements";
-import Searchbar from "./components/component/Searchbar";
 import Header from "./components/component/Header";
 import JobsPage from "@/pages/JobsPage";
 import SettingsPage from "@/pages/SettingsPage";
+import EditCaseStudy from "@/pages/EditCaseStudy";
+import CaseStudyPage from "@/pages/CaseStudyPage";
 
 const App = () => {
   return (
@@ -24,13 +22,21 @@ const App = () => {
         <div className="hidden sm:block w-1/5 ">
           <SidebarElements />
         </div>
-        <div>
+        <div className=" w-full">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/add-case-study" element={<CreateCaseStudy />} />
             <Route path="/user/:userId" element={<ProfilePage />} />
+            <Route
+              path="/case-study/:caseStudyId"
+              element={<CaseStudyPage />}
+            />
+            <Route
+              path="/case-study/edit/:caseStudyId"
+              element={<EditCaseStudy />}
+            />
             <Route path="/dashboard" element={<DashBoard />} />
             <Route path="/jobs" element={<JobsPage />} />
             <Route path="/settings" element={<SettingsPage />} />

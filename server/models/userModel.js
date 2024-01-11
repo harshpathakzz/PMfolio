@@ -47,7 +47,7 @@ const userSchema = new Schema(
         ref: "User",
       },
     ],
-    followersCount: {
+    followerCount: {
       type: Number,
       default: 0,
     },

@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/create", validateToken, upload.single("image"), createCaseStudy);
 
 // Get all case studies
-router.get("/:id", getCaseStudiesByUserId);
+router.get("/user/:userId", getCaseStudiesByUserId);
 
 // Get a specific case study by ID
 router.get("/:id", getCaseStudyById);
