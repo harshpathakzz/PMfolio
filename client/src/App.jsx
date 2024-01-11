@@ -24,7 +24,7 @@ const App = () => {
         <div className="hidden sm:block w-1/5 ">
           <SidebarElements />
         </div>
-        <div>
+        <div className=" w-full  ">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
