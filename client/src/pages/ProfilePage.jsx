@@ -24,16 +24,18 @@ const ProfilePage = () => {
   }, [userId]);
 
   return (
-    <div>
+    <div className="container mx-auto p-4">
       {userData ? (
-        <div>
-          <Avatar>
+        <div className="flex items-center flex-col">
+          <Avatar className="mb-4 h-20 w-20">
             <AvatarImage src={userData.profilePicture} />
             <AvatarFallback>IMG</AvatarFallback>
           </Avatar>
+          <h2 className="text-2xl font-bold">{userData.username}</h2>
+          <p className="text-muted-foreground">{userData.bio}</p>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p className="text-center">Loading...</p>
       )}
     </div>
   );
