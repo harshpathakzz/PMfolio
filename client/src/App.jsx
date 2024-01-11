@@ -18,13 +18,9 @@ const App = () => {
         <Header />
       </div>
       <div className="flex">
-        {/* Render Sidebar only on desktop */}
-        {window.innerWidth >= 640 && (
-          <div className="hidden sm:block w-1/5 bg-green-600">
-            Sidebar Desktop
-          </div>
-        )}
-
+        <div className="hidden sm:block w-1/5 bg-green-600">
+          Sidebar Desktop
+        </div>
         <div>
           <Routes>
             <Route path="/" element={<HomePage />} />
