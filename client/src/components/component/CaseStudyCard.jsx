@@ -15,7 +15,7 @@ export default function CaseStudyCard({ title, coverImage }) {
         width="400"
       />
       <CardContent className="p-4">
-        <CardTitle className="text-lg font-semibold text-center">
+        <CardTitle className="text-lg font-semibold tracking-tight truncate ">
           {title}
         </CardTitle>
       </CardContent>
