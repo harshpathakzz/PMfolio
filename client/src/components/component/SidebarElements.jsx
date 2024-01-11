@@ -5,33 +5,33 @@ const SidebarElements = () => {
   const [selectedItem, setSelectedItem] = useState("feed");
 
   const handleItemClick = (item) => {
-    setSelectedItem(item);
+    setSelectedItem((prevItem) => (prevItem === item ? null : item));
   };
 
   return (
     <div className="p-4">
       <ul className="space-y-2">
-        <li className={`${selectedItem === "feed" && "font-bold"}`}>
+        <li>
           <Button
-            variant="secondary"
+            variant={selectedItem === "feed" ? "secondary" : "ghost"}
             onClick={() => handleItemClick("feed")}
             className="w-full"
           >
             Feed
           </Button>
         </li>
-        <li className={`${selectedItem === "dashboard" && "font-bold"}`}>
+        <li>
           <Button
-            variant="secondary"
+            variant={selectedItem === "dashboard" ? "secondary" : "ghost"}
             onClick={() => handleItemClick("dashboard")}
             className="w-full"
           >
             Dashboard
           </Button>
         </li>
-        <li className={`${selectedItem === "jobs" && "font-bold"}`}>
+        <li>
           <Button
-            variant="secondary"
+            variant={selectedItem === "jobs" ? "secondary" : "ghost"}
             onClick={() => handleItemClick("jobs")}
             className="w-full"
           >
@@ -41,20 +41,19 @@ const SidebarElements = () => {
       </ul>
 
       <div className="mt-4">
-        <h3 className="text-lg font-semibold">Settings</h3>
         <ul className="space-y-2">
-          <li className={`${selectedItem === "settings" && "font-bold"}`}>
+          <li>
             <Button
-              variant="secondary"
+              variant={selectedItem === "settings" ? "secondary" : "ghost"}
               onClick={() => handleItemClick("settings")}
               className="w-full"
             >
               Settings
             </Button>
           </li>
-          <li className={`${selectedItem === "logout" && "font-bold"}`}>
+          <li>
             <Button
-              variant="secondary"
+              variant={selectedItem === "logout" ? "secondary" : "ghost"}
               onClick={() => handleItemClick("logout")}
               className="w-full"
             >
@@ -62,9 +61,6 @@ const SidebarElements = () => {
             </Button>
           </li>
         </ul>
-        <Button variant="secondary" className="w-full">
-          Helloo
-        </Button>
       </div>
     </div>
   );

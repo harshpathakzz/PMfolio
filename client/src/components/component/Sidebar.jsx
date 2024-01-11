@@ -6,6 +6,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import SidebarElements from "@/components/component/SidebarElements";
 import { AlignLeft } from "lucide-react";
 const Sidebar = () => {
   return (
@@ -15,10 +16,9 @@ const Sidebar = () => {
       </SheetTrigger>
       <SheetContent side="left" className="w-2/4">
         <SheetHeader>
-          <SheetTitle>Are you absolutely sure?</SheetTitle>
+          <SheetTitle>PMfolio</SheetTitle>
           <SheetDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            <SidebarElements />
           </SheetDescription>
         </SheetHeader>
       </SheetContent>
