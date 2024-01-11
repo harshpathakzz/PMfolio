@@ -1,7 +1,8 @@
 import React from "react";
-
+import { useParams } from "react-router-dom";
 const CaseStudyPage = () => {
-  return <div>CaseStudyPage</div>;
+  const { caseStudyId } = useParams();
+  return <div>CaseStudyPage {caseStudyId}</div>;
 };
 
 export default CaseStudyPage;

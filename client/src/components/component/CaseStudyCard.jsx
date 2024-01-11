@@ -1,8 +1,17 @@
 import { CardTitle, CardContent, Card } from "@/components/ui/card";
 
-export default function CaseStudyCard({ title, coverImage }) {
+const CaseStudyCard = ({ caseStudyId, title, coverImage, onClick }) => {
+  const handleClick = () => {
+    if (onClick) {
+      onClick(caseStudyId);
+    }
+  };
+
   return (
-    <Card className="shadow-lg max-w-md mx-auto">
+    <Card
+      className="shadow-lg max-w-md mx-auto cursor-pointer"
+      onClick={handleClick}
+    >
       <img
         alt="Placeholder"
         className="object-cover w-full h-50 rounded-t-lg"
@@ -19,4 +28,6 @@ export default function CaseStudyCard({ title, coverImage }) {
       </CardContent>
     </Card>
   );
-}
+};
+
+export default CaseStudyCard;
