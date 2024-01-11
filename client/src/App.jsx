@@ -7,7 +7,7 @@ import LoginPage from "@/pages/LoginPage";
 import { Routes, Route } from "react-router-dom";
 import CreateCaseStudy from "@/pages/CreateCaseStudy";
 import ProfilePage from "@/pages/ProfilePage";
-import Sidebar from "@/components/component/Sidebar";
+import SidebarElements from "@/components/component/SidebarElements";
 import Searchbar from "./components/component/Searchbar";
 import Header from "./components/component/Header";
 
@@ -18,8 +18,8 @@ const App = () => {
         <Header />
       </div>
       <div className="flex">
-        <div className="hidden sm:block w-1/5 bg-green-600">
-          Sidebar Desktop
+        <div className="hidden sm:block w-1/5 ">
+          <SidebarElements />
         </div>
         <div>
           <Routes>
