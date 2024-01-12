@@ -7,12 +7,15 @@ import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CaseStudyPage = () => {
   const { caseStudyId } = useParams();
   const [caseStudyData, setCaseStudyData] = useState(null);
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
+  const visitorId = useSelector((state) => state.auth.user._id);
+  const [owner, setOwner] = useState(false);
 
   useEffect(() => {
     const fetchCaseStudyData = async () => {
@@ -74,14 +77,16 @@ const CaseStudyPage = () => {
               </div>
               <div></div>
               <div>
-                <Button
-                  variant="secondary"
-                  className="text-sm font-semibold leading-none pl-2 pr-1 mr-2"
-                  onClick={() => navigate(`/case-study/edit/${caseStudyId}`)}
-                >
-                  Edit
-                  <Pencil className="ml-1 h-4/6" />
-                </Button>
+                {visitorId === caseStudyData.userId && (
+                  <Button
+                    variant="secondary"
+                    className="text-sm font-semibold leading-none pl-2 pr-1 mr-2"
+                    onClick={() => navigate(`/case-study/edit/${caseStudyId}`)}
+                  >
+                    Edit
+                    <Pencil className="ml-1 h-4/6" />
+                  </Button>
+                )}
                 <Button
                   className="text-sm font-semibold leading-none pl-2 pr-1"
                   onClick={() => window.open(caseStudyData.link, "_blank")}
