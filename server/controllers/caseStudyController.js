@@ -5,13 +5,6 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export const createCaseStudy = async (req, res) => {
   try {
     const { title, description, link } = req.body;
-
-    // // Check if the request has files
-    // if (!req.files || Object.keys(req.files).length === 0) {
-    //   return res.status(400).json({ error: "No files were uploaded." });
-    // }
-
-    // Assuming "coverImageFile" is the name attribute of your file input field
     const imageBuffer = req.file.buffer;
     const filename = Date.now() + "_" + req.file.originalname;
     const contentType = req.file.mimetype;

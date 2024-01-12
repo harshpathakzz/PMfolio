@@ -25,4 +25,6 @@ router.put("/:id", validateToken, updateCaseStudy);
 // Delete a case study by ID
 router.delete("/:id", validateToken, deleteCaseStudy);
 
+//Get all case studies
+
 export default router;
