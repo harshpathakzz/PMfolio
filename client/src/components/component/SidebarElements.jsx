@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const SidebarElements = () => {
@@ -40,28 +40,26 @@ const SidebarElements = () => {
         </li>
       </ul>
 
-      <div className="mt-4">
-        <ul className="space-y-2">
-          <li>
-            <Button
-              variant={selectedItem === "settings" ? "secondary" : "ghost"}
-              onClick={() => handleItemClick("settings")}
-              className="w-full"
-            >
-              Settings
-            </Button>
-          </li>
-          <li>
-            <Button
-              variant={selectedItem === "logout" ? "secondary" : "ghost"}
-              onClick={() => handleItemClick("logout")}
-              className="w-full"
-            >
-              Logout
-            </Button>
-          </li>
-        </ul>
-      </div>
+      <ul className="space-y-2">
+        <li>
+          <Button
+            variant={selectedItem === "settings" ? "secondary" : "ghost"}
+            onClick={() => handleItemClick("settings")}
+            className="w-full"
+          >
+            Settings
+          </Button>
+        </li>
+        <li>
+          <Button
+            variant={selectedItem === "logout" ? "secondary" : "ghost"}
+            onClick={() => handleItemClick("logout")}
+            className="w-full"
+          >
+            Logout
+          </Button>
+        </li>
+      </ul>
     </div>
   );
 };
