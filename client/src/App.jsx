@@ -11,6 +11,7 @@ import JobsPage from "@/pages/JobsPage";
 import SettingsPage from "@/pages/SettingsPage";
 import EditCaseStudy from "@/pages/EditCaseStudy";
 import CaseStudyPage from "@/pages/CaseStudyPage";
+import Feed from "@/pages/Feed";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/feed" element={<Feed />} />
             <Route path="/add-case-study" element={<CreateCaseStudy />} />
             <Route path="/user/:userId" element={<ProfilePage />} />
             <Route
