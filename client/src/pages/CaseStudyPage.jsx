@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import { Pencil } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +50,7 @@ const CaseStudyPage = () => {
             className="w-full h-48 object-cover object-center rounded-t-lg"
           />
           <div className="p-4">
-            <h2 className="text-2xl font-bold mb-2">{caseStudyData.title}</h2>
+            <h2 className="text-2xl font-bold mb-4">{caseStudyData.title}</h2>
             <div className="flex justify-between mb-2">
               <div>
                 {userData && (
@@ -71,9 +72,18 @@ const CaseStudyPage = () => {
                   </div>
                 )}
               </div>
+              <div></div>
               <div>
                 <Button
-                  className="text-sm font-semibold leading-none"
+                  variant="secondary"
+                  className="text-sm font-semibold leading-none pl-2 pr-1 mr-2"
+                  onClick={() => navigate(`/case-study/edit/${caseStudyId}`)}
+                >
+                  Edit
+                  <Pencil className="ml-1 h-4/6" />
+                </Button>
+                <Button
+                  className="text-sm font-semibold leading-none pl-2 pr-1"
                   onClick={() => window.open(caseStudyData.link, "_blank")}
                 >
                   Visit Link
