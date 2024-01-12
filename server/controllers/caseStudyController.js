@@ -1,6 +1,11 @@
 import CaseStudy from "../models/caseStudymodel.js";
 import { storage } from "../config/firebaseConfig.js";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 
 export const createCaseStudy = async (req, res) => {
   try {
@@ -67,24 +72,61 @@ export const getCaseStudyById = async (req, res) => {
 // Update a case study by ID
 export const updateCaseStudy = async (req, res) => {
   try {
+    const { title, description, link } = req.body;
+
+    // Check if an image is provided for update
+    let coverImage;
+    if (req.file) {
+      const imageBuffer = req.file.buffer;
+      const filename = Date.now() + "_" + req.file.originalname;
+      const contentType = req.file.mimetype;
+
+      // Upload the new image to Firebase storage
+      const storageRef = ref(storage, `coverImages/${filename}`);
+      await uploadBytes(storageRef, imageBuffer, { contentType });
+
+      // Get the download URL of the uploaded image
+      coverImage = await getDownloadURL(storageRef);
+
+      // Delete the old image if it exists
+      const existingCaseStudy = await CaseStudy.findById(
+        req.params.caseStudyId
+      );
+      if (existingCaseStudy && existingCaseStudy.coverImage) {
+        const oldImageRef = ref(storage, existingCaseStudy.coverImage);
+        await deleteObject(oldImageRef);
+      }
+    }
+
+    // Update the case study in the database
     const updatedCaseStudy = await CaseStudy.findByIdAndUpdate(
-      req.params.id,
-      req.body,
+      req.params.caseStudyId,
+      {
+        title,
+        description,
+        link,
+        ...(coverImage && { coverImage }),
+      },
       { new: true }
     );
+
     if (!updatedCaseStudy) {
       return res.status(404).json({ error: "Case study not found" });
     }
+
     return res.status(200).json(updatedCaseStudy);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 // Delete a case study by ID
 export const deleteCaseStudy = async (req, res) => {
   try {
-    const deletedCaseStudy = await CaseStudy.findByIdAndDelete(req.params.id);
+    const deletedCaseStudy = await CaseStudy.findByIdAndDelete(
+      req.params.caseStudyId
+    );
     if (!deletedCaseStudy) {
       return res.status(404).json({ error: "Case study not found" });
     }

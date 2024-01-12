@@ -24,9 +24,13 @@ router.get("/user/:userId", getCaseStudiesByUserId);
 router.get("/:caseStudyId", getCaseStudyById);
 
 // Update a case study by ID
-router.put("/:id", validateToken, updateCaseStudy);
-
+router.put(
+  "/:caseStudyId",
+  validateToken,
+  upload.single("image"),
+  updateCaseStudy
+);
 // Delete a case study by ID
-router.delete("/:id", validateToken, deleteCaseStudy);
+router.delete("/:caseStudyId", validateToken, deleteCaseStudy);
 
 export default router;
