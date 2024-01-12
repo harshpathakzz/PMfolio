@@ -53,7 +53,10 @@ const CaseStudyPage = () => {
             <div className="flex justify-between mb-2">
               <div>
                 {userData && (
-                  <div className="flex items-center mb-2">
+                  <div
+                    className="flex items-center mb-2 cursor-pointer"
+                    onClick={() => navigate(`/user/${userData._id}`)}
+                  >
                     <Avatar className="mr-2">
                       <AvatarImage
                         src={userData.profilePicture}
