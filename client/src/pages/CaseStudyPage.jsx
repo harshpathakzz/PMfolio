@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -49,26 +50,35 @@ const CaseStudyPage = () => {
           />
           <div className="p-4">
             <h2 className="text-2xl font-bold mb-2">{caseStudyData.title}</h2>
-            {userData && (
-              <div className="flex items-center mb-2">
-                <Avatar className="mr-2">
-                  <AvatarImage
-                    src={userData.profilePicture}
-                    alt="Profile Picture"
-                    className="rounded-full"
-                  />
-                  <AvatarFallback>{userData.username.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <p className="text-gray-700">{userData.username}</p>
+            <div className="flex justify-between mb-2">
+              <div>
+                {userData && (
+                  <div className="flex items-center mb-2">
+                    <Avatar className="mr-2">
+                      <AvatarImage
+                        src={userData.profilePicture}
+                        alt="Profile Picture"
+                        className="rounded-full"
+                      />
+                      <AvatarFallback>
+                        {userData.username.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <p className="font-semibold">{userData.username}</p>
+                  </div>
+                )}
               </div>
-            )}
-            <Button
-              className="px-4 py-2 mb-2 w-full"
-              onClick={() => window.open(caseStudyData.link, "_blank")}
-            >
-              Visit Link
-              <ArrowTopRightIcon className="ml-1" />
-            </Button>
+              <div>
+                <Button
+                  className="text-sm font-semibold leading-none"
+                  onClick={() => window.open(caseStudyData.link, "_blank")}
+                >
+                  Visit Link
+                  <ArrowTopRightIcon className="ml-1" />
+                </Button>
+              </div>
+            </div>
+            <Separator className="my-2" />
 
             <p className="text-sm">{caseStudyData.description}</p>
           </div>
