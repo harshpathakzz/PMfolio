@@ -50,7 +50,7 @@ const CaseStudyPage = () => {
             className="w-full h-48 object-cover object-center rounded-t-lg"
           />
           <div className="p-4">
-            <h2 className="text-2xl font-bold mb-2">{caseStudyData.title}</h2>
+            <h2 className="text-2xl font-bold mb-4">{caseStudyData.title}</h2>
             <div className="flex justify-between mb-2">
               <div>
                 {userData && (
