@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CaseStudyCard from "@/components/component/CaseStudyCard";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const { userId } = useParams();
   const [userData, setUserData] = useState(null);
   const [userCaseStudies, setUserCaseStudies] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -64,8 +66,12 @@ const ProfilePage = () => {
                 {userCaseStudies.map((caseStudy) => (
                   <CaseStudyCard
                     key={caseStudy._id}
+                    caseStudyId={caseStudy._id}
                     title={caseStudy.title}
                     coverImage={caseStudy.coverImage}
+                    onClick={(caseStudyId) =>
+                      navigate(`/case-study/${caseStudyId}`)
+                    }
                   />
                 ))}
               </div>
