@@ -93,3 +93,19 @@ export const deleteCaseStudy = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+// Get all case studies with pagination for infinite scroll
+export const getAllCaseStudies = async (req, res) => {
+  try {
+    const { page = 1, pageSize = 10 } = req.query;
+
+    const caseStudies = await CaseStudy.find()
+      .skip((page - 1) * pageSize)
+      .limit(Number(pageSize))
+      .sort({ createdAt: -1 }); // Sorting by createdAt in descending order
+
+    return res.status(200).json(caseStudies);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};

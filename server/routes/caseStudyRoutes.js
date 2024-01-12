@@ -5,10 +5,14 @@ import {
   getCaseStudyById,
   updateCaseStudy,
   deleteCaseStudy,
+  getAllCaseStudies,
 } from "../controllers/caseStudyController.js";
 import validateToken from "../middleware/validateToken.js";
 import { upload } from "../config/multerConfig.js";
 const router = express.Router();
+
+//Get all case studies
+router.get("/all", getAllCaseStudies);
 
 // Create a new case study
 router.post("/create", validateToken, upload.single("image"), createCaseStudy);
@@ -24,7 +28,5 @@ router.put("/:id", validateToken, updateCaseStudy);
 
 // Delete a case study by ID
 router.delete("/:id", validateToken, deleteCaseStudy);
-
-//Get all case studies
 
 export default router;
