@@ -14,7 +14,7 @@ const CaseStudyPage = () => {
   const [caseStudyData, setCaseStudyData] = useState(null);
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
-  const visitorId = useSelector((state) => state.auth.user._id);
+  const visitorId = useSelector((state) => state.auth.user?._id);
   const [owner, setOwner] = useState(false);
 
   useEffect(() => {
