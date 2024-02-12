@@ -12,7 +12,6 @@ import SettingsPage from "@/pages/SettingsPage";
 import EditCaseStudy from "@/pages/EditCaseStudy";
 import CaseStudyPage from "@/pages/CaseStudyPage";
 import Feed from "@/pages/Feed";
-import LandingPage from "./pages/LandingPage";
 
 const App = () => {
   return (
