@@ -1,4 +1,4 @@
-import HomePage from "@/pages/HomePage";
+import LandingPage from "@/pages/LandingPage";
 import RegisterPage from "@/pages/RegisterPage";
 import LoginPage from "@/pages/LoginPage";
 import { Routes, Route } from "react-router-dom";
@@ -12,6 +12,7 @@ import SettingsPage from "@/pages/SettingsPage";
 import EditCaseStudy from "@/pages/EditCaseStudy";
 import CaseStudyPage from "@/pages/CaseStudyPage";
 import Feed from "@/pages/Feed";
+import LandingPage from "./pages/LandingPage";
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ const App = () => {
         </div>
         <div className=" w-full">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/feed" element={<Feed />} />
