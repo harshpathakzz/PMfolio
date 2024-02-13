@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { Analytics } from "@vercel/analytics/react";
 import LandingPage from "@/pages/LandingPage";
 import RegisterPage from "@/pages/RegisterPage";
 import LoginPage from "@/pages/LoginPage";
@@ -26,6 +26,7 @@ const App = () => {
 
   return (
     <div>
+      <Analytics />
       {!isPublicRoute && (
         <div>
           <Header />
