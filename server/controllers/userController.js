@@ -47,7 +47,11 @@ export const updateUserProfile = async (req, res) => {
       existingUser.profilePicture !== "https://ui.shadcn.com/avatars/02.png"
     ) {
       const oldImageRef = ref(storage, existingUser.profilePicture);
-      await deleteObject(oldImageRef);
+      try {
+        await deleteObject(oldImageRef);
+      } catch (deleteError) {
+        console.warn("Unable to delete old profile picture:", deleteError);
+      }
     }
 
     // Update the user in the database

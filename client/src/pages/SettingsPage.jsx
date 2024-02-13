@@ -76,7 +76,7 @@ export default function SettingsPage() {
         }
       );
       console.log(response);
-      navigate("/feed");
+      navigate("/dashboard");
     } catch (error) {
       // Handle network error or server error
       console.log("Error:", error);
