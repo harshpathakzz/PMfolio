@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../mode-toggle";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const navigate = useNavigate();
   return (
     <div className="m-2 ">
       <div className="flex items-center justify-between p-1">
@@ -17,7 +19,11 @@ const Header = () => {
 
         <Searchbar />
         <div>
-          {!isLoggedIn && <Button className="mr-2 ">Login</Button>}
+          {!isLoggedIn && (
+            <Button className="mr-2" onClick={() => navigate("/login")}>
+              Login
+            </Button>
+          )}
           <ModeToggle className />
         </div>
       </div>
