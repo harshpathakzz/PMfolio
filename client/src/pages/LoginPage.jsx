@@ -40,7 +40,7 @@ const LoginPage = () => {
     try {
       // Send login request to the server
       const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "https://pmfolio-v1.onrender.com/api/v1/auth/login",
         formData
       );
 
