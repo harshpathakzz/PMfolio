@@ -1,7 +1,96 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import CaseStudyCard from "@/components/component/CaseStudyCard";
+import axios from "axios";
+import { PlusIcon } from "@radix-ui/react-icons";
+import { useNavigate } from "react-router-dom";
 
-const DashBoard = () => {
-  return <div>DashBoard</div>;
+const ProfilePage = () => {
+  const userId = useSelector((state) => state.auth.user?._id);
+  const [userData, setUserData] = useState(null);
+  const [userCaseStudies, setUserCaseStudies] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/user/${userId}/profile`
+        );
+        setUserData(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    const fetchUserCaseStudies = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/case-studies/user/${userId}`
+        );
+        setUserCaseStudies(response.data);
+      } catch (error) {
+        console.error("Error fetching case studies:", error);
+      }
+    };
+
+    fetchUserData();
+    fetchUserCaseStudies();
+  }, [userId]);
+
+  return (
+    <div className="container mx-auto p-4">
+      {userData ? (
+        <div className="flex flex-col items-center">
+          <Avatar className="mb-4 h-20 w-20">
+            <AvatarImage src={userData.profilePicture} />
+            <AvatarFallback>IMG</AvatarFallback>
+          </Avatar>
+          <h2 className="text-2xl font-bold">{userData.username}</h2>
+          <p className="text-muted-foreground">{userData.bio}</p>
+          <div className="flex mt-2">
+            <p className="mr-4">
+              <span className="font-bold">{userData.followerCount}</span>{" "}
+              followers
+            </p>
+            <p>
+              <span className="font-bold">{userData.followingCount}</span>{" "}
+              following
+            </p>
+          </div>
+          <Button className="mt-5" onClick={() => navigate("/add-case-study")}>
+            <PlusIcon className="w-6 h-6 mr-2" />
+            Create Case Study
+          </Button>
+
+          {userCaseStudies ? (
+            <div className="mt-4">
+              <h3 className="text-xl font-bold mb-2">Case Studies</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {userCaseStudies.map((caseStudy) => (
+                  <CaseStudyCard
+                    key={caseStudy._id}
+                    caseStudyId={caseStudy._id}
+                    title={caseStudy.title}
+                    coverImage={caseStudy.coverImage}
+                    onClick={(caseStudyId) =>
+                      navigate(`/case-study/${caseStudyId}`)
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="text-center">Loading case studies...</p>
+          )}
+        </div>
+      ) : (
+        <p className="text-center">Loading...</p>
+      )}
+    </div>
+  );
 };
 
-export default DashBoard;
+export default ProfilePage;

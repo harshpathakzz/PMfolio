@@ -9,6 +9,8 @@ import {
   updateUserProfile,
 } from "../controllers/userController.js";
 import validateToken from "../middleware/validateToken.js";
+import { upload } from "../config/multerConfig.js";
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -18,7 +20,12 @@ router.get("/", (req, res) => {
 
 router.get("/:id/profile", getUserProfile);
 
-router.put("/update", validateToken, updateUserProfile);
+router.put(
+  "/update",
+  validateToken,
+  upload.single("profilePicture"),
+  updateUserProfile
+);
 
 router.get("/:id/blogs", getUserBlogs);
 

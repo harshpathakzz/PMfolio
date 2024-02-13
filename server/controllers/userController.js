@@ -1,5 +1,11 @@
 import User from "../models/userModel.js";
-
+import { storage } from "../config/firebaseConfig.js";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 export const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -11,13 +17,63 @@ export const getUserProfile = async (req, res) => {
 
 export const updateUserProfile = async (req, res) => {
   try {
-    console.log(req.user.id);
-    const user = await User.findByIdAndUpdate(req.user.id, req.body, {
-      new: true,
-    });
-    return res.json(user);
+    const { username, bio } = req.body;
+
+    // Check if profile picture is provided for update
+    let profilePicture;
+    if (req.file) {
+      const imageBuffer = req.file.buffer;
+      const filename = Date.now() + "_" + req.file.originalname;
+      const contentType = req.file.mimetype;
+
+      // Upload the new image to Firebase storage
+      const storageRef = ref(storage, `profilePictures/${filename}`);
+      await uploadBytes(storageRef, imageBuffer, { contentType });
+
+      // Get the download URL of the uploaded image
+      profilePicture = await getDownloadURL(storageRef);
+    }
+
+    // Find the user by ID
+    const existingUser = await User.findById(req.user.id);
+
+    if (!existingUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Delete the old profile picture if it exists
+    if (
+      existingUser.profilePicture &&
+      existingUser.profilePicture !== "https://ui.shadcn.com/avatars/02.png"
+    ) {
+      const oldImageRef = ref(storage, existingUser.profilePicture);
+      try {
+        await deleteObject(oldImageRef);
+      } catch (deleteError) {
+        console.warn("Unable to delete old profile picture:", deleteError);
+      }
+    }
+
+    // Update the user in the database
+    const updatedFields = { username, bio };
+    if (profilePicture) {
+      updatedFields.profilePicture = profilePicture;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      updatedFields,
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.status(200).json(updatedUser);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
