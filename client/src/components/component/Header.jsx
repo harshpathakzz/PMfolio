@@ -17,7 +17,7 @@ const Header = () => {
         </div>
         <div className="sm:block hidden font-bold text-2xl">PmFolio</div>
 
-        <Searchbar />
+        {/* <Searchbar /> */}
         <div>
           {!isLoggedIn && (
             <Button className="mr-2" onClick={() => navigate("/login")}>

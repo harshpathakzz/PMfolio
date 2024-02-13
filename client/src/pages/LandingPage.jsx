@@ -12,15 +12,17 @@ const LandingPage = () => {
   }
 
   return (
-    <div className=" min-h-screen flex flex-col justify-center items-center">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-background">
       <div className="max-w-lg mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-6">Welcome to Our App!</h1>
-        <p className="text-lg mb-8">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-7xl">
+          PMfolio
+        </h1>
+        <p className="text-xl text-muted-foreground">
+          Connect with other product managers, share insights, and build your
+          professional network.
         </p>
         <Button
-          className="w-1/2"
+          className="w-1/2 bg-primary hover:bg-primary-foreground text-primary-foreground hover:text-primary rounded-lg py-3 px-6 shadow-md"
           onClick={() => {
             navigate("/feed");
           }}
