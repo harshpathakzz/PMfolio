@@ -34,7 +34,7 @@ const Feed = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:5000/api/v1/case-studies/all?page=${page}`
+          `https://pmfolio-v1.onrender.com/api/v1/case-studies/all?page=${page}`
         );
 
         setCaseStudies((prevCaseStudies) => [

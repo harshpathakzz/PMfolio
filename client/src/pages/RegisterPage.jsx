@@ -41,7 +41,7 @@ const RegisterPage = () => {
     try {
       // Send registration request to the server
       const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/register",
+        "https://pmfolio-v1.onrender.com/api/v1/auth/register",
         formData
       );
 

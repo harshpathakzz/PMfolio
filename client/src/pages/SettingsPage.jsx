@@ -24,7 +24,7 @@ export default function SettingsPage() {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v1/user/${userId}/profile`
+          `https://pmfolio-v1.onrender.com/api/v1/user/${userId}/profile`
         );
         const fetchedUserData = response.data;
 
@@ -67,7 +67,7 @@ export default function SettingsPage() {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/v1/user/update`,
+        `https://pmfolio-v1.onrender.com/api/v1/user/update`,
         data,
         {
           headers: {

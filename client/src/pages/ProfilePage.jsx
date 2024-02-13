@@ -15,7 +15,7 @@ const ProfilePage = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v1/user/${userId}/profile`
+          `https://pmfolio-v1.onrender.com/api/v1/user/${userId}/profile`
         );
         setUserData(response.data);
       } catch (error) {
@@ -26,7 +26,7 @@ const ProfilePage = () => {
     const fetchUserCaseStudies = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v1/case-studies/user/${userId}`
+          `https://pmfolio-v1.onrender.com/api/v1/case-studies/user/${userId}`
         );
         setUserCaseStudies(response.data);
       } catch (error) {

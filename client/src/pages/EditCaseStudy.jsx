@@ -25,7 +25,7 @@ export default function EditCaseStudy() {
     const fetchCaseStudyData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v1/case-studies/${caseStudyId}`
+          `https://pmfolio-v1.onrender.com/api/v1/case-studies/${caseStudyId}`
         );
         const fetchedCaseStudyData = response.data;
 
@@ -72,7 +72,7 @@ export default function EditCaseStudy() {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/v1/case-studies/${caseStudyId}`,
+        `https://pmfolio-v1.onrender.com/ender.com/api/v1/case-studies/${caseStudyId}`,
         data,
         {
           headers: {
@@ -96,7 +96,7 @@ export default function EditCaseStudy() {
     e.preventDefault();
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/v1/case-studies/${caseStudyId}`,
+        `https://pmfolio-v1.onrender.com/api/v1/case-studies/${caseStudyId}`,
 
         {
           headers: {

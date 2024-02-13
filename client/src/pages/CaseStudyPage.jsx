@@ -21,14 +21,14 @@ const CaseStudyPage = () => {
     const fetchCaseStudyData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/v1/case-studies/${caseStudyId}`
+          `https://pmfolio-v1.onrender.com/api/v1/case-studies/${caseStudyId}`
         );
         setCaseStudyData(response.data);
 
         if (response.data) {
           try {
             const userResponse = await axios.get(
-              `http://localhost:5000/api/v1/user/${response.data.userId}/profile`
+              `https://pmfolio-v1.onrender.com/api/v1/user/${response.data.userId}/profile`
             );
             setUserData(userResponse.data);
           } catch (error) {
