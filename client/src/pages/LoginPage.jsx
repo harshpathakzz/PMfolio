@@ -23,6 +23,10 @@ const LoginPage = () => {
     }
   }, [isLoggedIn, navigate]);
 
+  const handleRegisterRedirect = () => {
+    navigate("/register");
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -93,6 +97,13 @@ const LoginPage = () => {
         <Button type="submit" className="w-full">
           Login
         </Button>
+        <div className="flex justify-center items-center">
+          {" "}
+          <Label>Don't have an account?</Label>
+          <Button variant="link" onClick={handleRegisterRedirect}>
+            Register
+          </Button>
+        </div>
       </form>
     </div>
   );
