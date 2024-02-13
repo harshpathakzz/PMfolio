@@ -1,11 +1,22 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const SidebarElements = () => {
+  const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState("feed");
 
   const handleItemClick = (item) => {
     setSelectedItem((prevItem) => (prevItem === item ? null : item));
+
+    if (item === "logout") {
+      // Clear local storage
+      localStorage.clear();
+      // Navigate to "/"
+      navigate("/");
+      // Refresh the page
+      window.location.reload();
+    }
   };
 
   return (
