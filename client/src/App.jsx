@@ -12,8 +12,11 @@ import SettingsPage from "@/pages/SettingsPage";
 import EditCaseStudy from "@/pages/EditCaseStudy";
 import CaseStudyPage from "@/pages/CaseStudyPage";
 import Feed from "@/pages/Feed";
+import { useSelector } from "react-redux";
+import Protected from "./components/component/Protected";
 
 const App = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   return (
     <div>
       <div>
@@ -29,7 +32,14 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/feed" element={<Feed />} />
-            <Route path="/add-case-study" element={<CreateCaseStudy />} />
+            <Route
+              path="/add-case-study"
+              element={
+                <Protected isLoggedIn={isLoggedIn}>
+                  <CreateCaseStudy />
+                </Protected>
+              }
+            />
             <Route path="/user/:userId" element={<ProfilePage />} />
             <Route
               path="/case-study/:caseStudyId"
@@ -39,9 +49,23 @@ const App = () => {
               path="/case-study/edit/:caseStudyId"
               element={<EditCaseStudy />}
             />
-            <Route path="/dashboard" element={<DashBoard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <Protected isLoggedIn={isLoggedIn}>
+                  <DashBoard />
+                </Protected>
+              }
+            />
             <Route path="/jobs" element={<JobsPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
+            <Route
+              path="/settings"
+              element={
+                <Protected isLoggedIn={isLoggedIn}>
+                  <SettingsPage />
+                </Protected>
+              }
+            />
             <Route path="*" element={<div>404</div>} />
           </Routes>
         </div>
