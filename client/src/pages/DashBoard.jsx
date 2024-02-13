@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import CaseStudyCard from "@/components/component/CaseStudyCard";
 import axios from "axios";
+import { PlusIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
@@ -58,6 +60,10 @@ const ProfilePage = () => {
               following
             </p>
           </div>
+          <Button className="mt-5" onClick={() => navigate("/add-case-study")}>
+            <PlusIcon className="w-6 h-6 mr-2" />
+            Create Case Study
+          </Button>
 
           {userCaseStudies ? (
             <div className="mt-4">
