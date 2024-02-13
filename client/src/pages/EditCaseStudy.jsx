@@ -5,7 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/slices/authSlice";
 
 export default function EditCaseStudy() {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ export default function EditCaseStudy() {
 
   const { caseStudyId } = useParams();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [caseStudyData, setCaseStudyData] = useState(null);
 
   useEffect(() => {
@@ -82,7 +83,12 @@ export default function EditCaseStudy() {
       );
     } catch (error) {
       // Handle network error or server error
-      console.error("Error:", error.message);
+      if (error.response && error.response.status === 401) {
+        dispatch(logout());
+        navigate("/login");
+      } else {
+        console.error("Error:", error.message);
+      }
     }
   };
 

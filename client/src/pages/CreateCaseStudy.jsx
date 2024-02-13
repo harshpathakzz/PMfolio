@@ -4,7 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateCaseStudy() {
   const [formData, setFormData] = useState({
@@ -14,6 +16,8 @@ export default function CreateCaseStudy() {
     link: "",
   });
   const accessToken = useSelector((state) => state.auth.accessToken);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
     setFormData({
@@ -59,7 +63,12 @@ export default function CreateCaseStudy() {
       }
     } catch (error) {
       // Handle network error or server error
-      console.error("Error:", error.message);
+      if (error.response && error.response.status === 401) {
+        dispatch(logout());
+        navigate("/login");
+      } else {
+        console.error("Error:", error.message);
+      }
     }
   };
 

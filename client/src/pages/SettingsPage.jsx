@@ -5,8 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/slices/authSlice";
 export default function SettingsPage() {
   const [formData, setFormData] = useState({
     username: "",
@@ -16,6 +16,7 @@ export default function SettingsPage() {
 
   const navigate = useNavigate();
   const accessToken = useSelector((state) => state.auth.accessToken);
+  const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.user._id);
 
   useEffect(() => {
@@ -79,7 +80,12 @@ export default function SettingsPage() {
       navigate("/dashboard");
     } catch (error) {
       // Handle network error or server error
-      console.log("Error:", error);
+      if (error.response && error.response.status === 401) {
+        dispatch(logout());
+        navigate("/login");
+      } else {
+        console.error("Error:", error.message);
+      }
     }
   };
 
