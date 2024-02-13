@@ -31,6 +31,10 @@ const RegisterPage = () => {
     });
   };
 
+  const handleLoginRedirect = () => {
+    navigate("/login");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -114,6 +118,13 @@ const RegisterPage = () => {
         <Button type="submit" className="w-full">
           Sign Up
         </Button>
+        <div className="flex justify-center items-center">
+          {" "}
+          <Label>Already have an account?</Label>
+          <Button variant="link" onClick={handleLoginRedirect}>
+            Login
+          </Button>
+        </div>
       </form>
     </div>
   );
