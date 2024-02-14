@@ -30,7 +30,7 @@ const SidebarElements = () => {
   return (
     <div className="p-4">
       <ul className="space-y-2">
-        {["feed", "dashboard", "jobs"].map((item) => (
+        {["feed"].map((item) => (
           <li key={item}>
             <Button
               variant={selectedItem === item ? "secondary" : "ghost"}
@@ -43,15 +43,28 @@ const SidebarElements = () => {
         ))}
       </ul>
       <ul className="space-y-2">
-        <li>
-          <Button
-            variant={selectedItem === "settings" ? "secondary" : "ghost"}
-            onClick={() => handleItemClick("settings")}
-            className="w-full"
-          >
-            Settings
-          </Button>
-        </li>
+        {isLoggedIn && (
+          <>
+            <li>
+              <Button
+                variant={selectedItem === "dashboard" ? "secondary" : "ghost"}
+                onClick={() => handleItemClick("dashboard")}
+                className="w-full"
+              >
+                Dashboard
+              </Button>
+            </li>
+            <li>
+              <Button
+                variant={selectedItem === "settings" ? "secondary" : "ghost"}
+                onClick={() => handleItemClick("settings")}
+                className="w-full"
+              >
+                Settings
+              </Button>
+            </li>
+          </>
+        )}
         {isLoggedIn && (
           <li>
             <Button
