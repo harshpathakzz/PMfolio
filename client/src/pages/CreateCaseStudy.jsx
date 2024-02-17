@@ -57,6 +57,7 @@ export default function CreateCaseStudy() {
       if (response.status === 201) {
         // Handle success (e.g., show a success message, redirect, etc.)
         console.log("Case study created successfully");
+        navigate("/dashboard");
       } else {
         // Handle error response (e.g., show an error message)
         console.error("Failed to create case study");
